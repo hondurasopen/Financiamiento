@@ -14,7 +14,7 @@ class Loanfees(models.Model):
     saldo_prestamo = fields.Float("Saldo Pendiente")
     notas = fields.Text("Notas")
     state = fields.Selection([('cotizacion', 'Cotizacion'), ('novigente', 'No vigente'), ('vigente', 'Vigente'), ('pagada', 'Pagada'), ('cancelada', 'Cencelada')], string='Estado de cuota', readonly=True, default='cotizacion')
-    description = fields.Text("Notas Generales")
+    notas = fields.Text("Notas Generales")
 
     @api.multi
     def action_cancelar(self):

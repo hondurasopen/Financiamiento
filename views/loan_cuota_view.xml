@@ -27,7 +27,7 @@
 	         </group>		
 	      <notebook>
 	     <page string="Notas generales">
-		
+		    <field name="notas" placeholder="Notas generales de cuota"/>
 		</page>
 	</notebook>
 	</sheet>     
@@ -52,7 +52,7 @@
    </record>
    <!--  Accion para Prestamos -->
    <record model="ir.actions.act_window" id="comercial_loan_management_fees_action">
-   <field name="name">Cuotas de lotes</field>
+   <field name="name">Cuotas de clientes</field>
    <field name="res_model">comercial.loan.management.fees</field>
    <field name="view_type">form</field>
    <field name="view_model">form</field>
@@ -63,7 +63,7 @@
    </record>
    
 	<record model="ir.actions.act_window" id="comercial_loan_management_fees_vigente_action">
-   <field name="name">Cuotas de lotes vigentes</field>
+   <field name="name">Cuotas vigentes</field>
    <field name="res_model">comercial.loan.management.fees</field>
    <field name="view_type">form</field>
    <field name="view_model">form</field>
@@ -74,28 +74,25 @@
    </record>
 
 	<record model="ir.actions.act_window" id="comercial_loan_management_fees_pagada_action">
-   <field name="name">Cuotas de lotes pagadas</field>
+   <field name="name">Cuotas pagadas</field>
    <field name="res_model">comercial.loan.management.fees</field>
    <field name="view_type">form</field>
    <field name="view_model">form</field>
 		<field name="domain">[('state','=','pagadas')]</field>
    <field name="help" type="html">
-   <p class="oe_view_nocontent_create">Crear cuotas de lote</p>
+   <p class="oe_view_nocontent_create">Crear cuotas de credito</p>
    </field>
    </record>
 
 
- <menuitem id="comercial_cuotas" name="Gestion de cuotas" string="Gestion de Cuotas" parent="comercial_menu_config" sequence="10"/>
+ <menuitem id="comercial_cuotas" name="Gestion de cuotas" string="Gestion de Cuotas" parent="comercial.menu_comercial_root" sequence="200"/>
 
- <menuitem id="loan_cuota_management" name="Cuota de lotes" string="Cuota de lotes" parent="comercial_cuotas" 
-action="comercial_loan_management_fees_action" sequence="10"/>
+ <menuitem id="loan_cuota_management" name="Cuotas" string="Cuotas" parent="comercial_cuotas" 
+action="comercial_loan_management_fees_action" sequence="200"/>
 
-  <menuitem id="loan_cuota_management_vigente" name="Cuota de lotes vigentes" string="Cuota de lotes vigente" parent="comercial_cuotas" 
-action="comercial_loan_management_fees_vigente_action" sequence="20"/>
+  <menuitem id="loan_cuota_management_vigente" name="Cuota de credito vigentes" string="Cuota de credito vigentes" parent="comercial_cuotas" action="comercial_loan_management_fees_vigente_action" sequence="30"/>
  
-  <menuitem id="loan_cuota_management_pagada" name="Cuota de lotes pagadas" string="Cuota de lotes pagadas" parent="comercial_cuotas" 
-action="comercial_loan_management_fees_pagada_action" sequence="20"/>
-    
+  <menuitem id="loan_cuota_management_pagada" name="Cuota de creditos pagadas" string="Cuota de creditos pagadas" parent="comercial_cuotas" action="comercial_loan_management_fees_pagada_action" sequence="20"/>
    </data>
 </odoo>
 

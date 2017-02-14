@@ -17,7 +17,7 @@ class Loan(models.Model):
     payment_term = fields.Selection([('contado', 'Contado'), ('3meses', '3 Meses'), ('6meses', '6 meses'), ('12meses', '12 meses')], string='Terminos de pago', default='contado')
     periodo_pago = fields.Selection
     product_id = fields.Many2one("product.product", "Articulo", required=True)
-    monthly_payment = fields.Float("Cuota de pago")
+    monthly_payment = fields.Monetary("Cuota de pago")
     notes = fields.Text("Notes")
     state = fields.Selection([('quotation', 'Cotizacion'), ('progress', 'Esperando aprobación'), ('rejected', 'Rechazado'), ('approved', 'Aprobado'), ('done', 'Terminado')], string='State', readonly=True, default='quotation')
     cuota_ids = fields.One2many("comercial.loan.management.fees", "contrato_id", "Cuotas de pago")
