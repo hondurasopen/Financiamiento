@@ -1,24 +1,26 @@
 # -*- encoding: utf-8 -*-
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
-from openerp import models, fields, api
+from odoo import models, fields, api
 
 
 class Loan(models.Model):
-    _name = "comerical.loan.management"
+    _name = "comercial.loan.management"
 
     name = fields.Char("Numero de registro", required=True)
     partner_id = fields.Many2one("res.partner", "Cliente", required=True)
     request_date = fields.Date("Fecha de solicitud", required=True)
     approval_date = fields.Date("Fecha de aprobación")
-    product_value = fields.Float("Precio de contado", required=True)
+    product_value = fields.Monetary("Precio de contado", required=True)
+    currency_id = fields.Many2one("res.currency", "Moneda", related='product_id.currency_id')
     interest_rate = fields.Float("Tasa de interes % (anual)", required=True)
-    payment_term = fields.Integer("Terminos de pago", required=True)
+    payment_term = fields.Selection([('contado', 'Contado'), ('3meses', '3 Meses'), ('6meses', '6 meses'), ('12meses', '12 meses')], string='Terminos de pago', default='contado')
+    periodo_pago = fields.Selection
     product_id = fields.Many2one("product.product", "Articulo", required=True)
     monthly_payment = fields.Float("Cuota de pago")
     notes = fields.Text("Notes")
     state = fields.Selection([('quotation', 'Cotizacion'), ('progress', 'Esperando aprobación'), ('rejected', 'Rechazado'), ('approved', 'Aprobado'), ('done', 'Terminado')], string='State', readonly=True, default='quotation')
-    # cuota_ids = fields.One2many("comercial.loan.management.fees", "contrato_id", "Cuotas de pago")
+    cuota_ids = fields.One2many("comercial.loan.management.fees", "contrato_id", "Cuotas de pago")
     # Campos seran utilizados en el contrato no aqui
     referencias1 = fields.Char("Referencia 1")
     tel_referencia_amistad1 = fields.Char("Tel. referencia")
@@ -33,6 +35,10 @@ class Loan(models.Model):
     dir_trabajo_aval = fields.Text("Dirección de trabajo")
     notas = fields.Text("Observaciones")
     casa = fields.Selection([('propia', 'Propia'), ('pagando', 'Pagando'), ('alquila', 'Alquila')], string='Casa')
+
+    @api.onchange("product_id")
+    def onchamgeproduct(self):
+        self.product_value = self.product_id.lst_price
 
     @api.multi
     def action_rejected(self):

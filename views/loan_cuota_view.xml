@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+  <!-- Vista Formulario Presamo-->
+   <record model="ir.ui.view" id="comercial_loan_management_fees_form_view">
+   <field name="name">comercial.loan.management.fees.form</field>
+   <field name="model">comercial.loan.management.fees</field>
+   <field name="arch" type="xml">
+     <form string="Cuotas de Prestamo">
+      <header>
+        <button name="action_cancelar" type="object" string="Cancelar cuota" states="cotizacion"  class="oe_highlight oe_read_only"/>
+        <field name="state" widget="statusbar" nolabel="1"/>
+      </header>
+      <sheet> 
+      <separator string="Información de Cuota"/> 
+            <group colspan="4">
+              <group cols="2">   
+               	  <field name="contrato_id"/>
+                  <field name="partner_id"/>
+	             </group>
+	           <group cols="2">
+                <field name="fecha_pago" />
+	               <field name="monto_cuota" />
+	               <field name="capital"/>
+	               <field name="interes"/>	
+	           </group>
+	         </group>		
+	      <notebook>
+	     <page string="Notas generales">
+		
+		</page>
+	</notebook>
+	</sheet>     
+     </form>
+   </field> 
+   </record> 
+   <!-- Fin de Vista form  -->
+   <!--  Vista Tree Tipo de Prestamo-->
+   <record model="ir.ui.view" id="comercial_loan_management_fees_tree_view">
+   <field name="name">comercial.loan.management.fees.tree</field>
+   <field name="model">comercial.loan.management.fees</field>
+   <field name="arch" type="xml">
+       <tree string="Tipo de Prestamos">
+              <field name="fecha_pago" />
+            	<field name="contrato_id"/>         
+              <field name="partner_id"/>
+	            <field name="monto_cuota" />
+	            <field name="capital"/>
+	            <field name="interes"/>
+       </tree>
+   </field> 
+   </record>
+   <!--  Accion para Prestamos -->
+   <record model="ir.actions.act_window" id="comercial_loan_management_fees_action">
+   <field name="name">Cuotas de lotes</field>
+   <field name="res_model">comercial.loan.management.fees</field>
+   <field name="view_type">form</field>
+   <field name="view_model">form</field>
+<field name="domain">[('state','=','novigente')]</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear cuotas de lote</p>
+   </field>
+   </record>
+   
+	<record model="ir.actions.act_window" id="comercial_loan_management_fees_vigente_action">
+   <field name="name">Cuotas de lotes vigentes</field>
+   <field name="res_model">comercial.loan.management.fees</field>
+   <field name="view_type">form</field>
+   <field name="view_model">form</field>
+		<field name="domain">[('state','=','vigente')]</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear cuotas de lote</p>
+   </field>
+   </record>
+
+	<record model="ir.actions.act_window" id="comercial_loan_management_fees_pagada_action">
+   <field name="name">Cuotas de lotes pagadas</field>
+   <field name="res_model">comercial.loan.management.fees</field>
+   <field name="view_type">form</field>
+   <field name="view_model">form</field>
+		<field name="domain">[('state','=','pagadas')]</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear cuotas de lote</p>
+   </field>
+   </record>
+
+
+ <menuitem id="comercial_cuotas" name="Gestion de cuotas" string="Gestion de Cuotas" parent="comercial_menu_config" sequence="10"/>
+
+ <menuitem id="loan_cuota_management" name="Cuota de lotes" string="Cuota de lotes" parent="comercial_cuotas" 
+action="comercial_loan_management_fees_action" sequence="10"/>
+
+  <menuitem id="loan_cuota_management_vigente" name="Cuota de lotes vigentes" string="Cuota de lotes vigente" parent="comercial_cuotas" 
+action="comercial_loan_management_fees_vigente_action" sequence="20"/>
+ 
+  <menuitem id="loan_cuota_management_pagada" name="Cuota de lotes pagadas" string="Cuota de lotes pagadas" parent="comercial_cuotas" 
+action="comercial_loan_management_fees_pagada_action" sequence="20"/>
+    
+   </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

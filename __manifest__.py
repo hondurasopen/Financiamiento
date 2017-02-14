@@ -15,8 +15,9 @@
     Este modulo se desarrollo en español para colaborar con la comunidad de Honduras""",
     'data': [
 		"views/menu_principal_view.xml",
-       "views/cliente_view.xml",
+        "views/cliente_view.xml",
 		"views/loan_view.xml",
+		"views/loan_cuota_view.xml",
 	#"reports/report_contract.xml",
 	#"reports/report_contract_view.xml",
         #"views/contract_view.xml",

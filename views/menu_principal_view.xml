@@ -7,6 +7,6 @@
     <menuitem id="comercial_menu_config" name="Gestión de creditos"
         sequence="100" parent="comercial.menu_comercial_root"/>
 
-<menuitem string="Gestión de clientes"  id="menu_gestion_cliente" parent="menu_comercial_root" sequence="10"/>
+<menuitem string="Gestión de clientes" id="menu_cliente_main" parent="comercial.menu_comercial_root" sequence="10"  groups= "sales_team.group_sale_manager,sales_team.group_sale_salesman,account.group_account_manager,account.group_account_user"/>
 
 </odoo>

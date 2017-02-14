@@ -48,45 +48,43 @@
         </field>
 </record>
 
-<record model="ir.ui.view" id="cliente_tree_view">
-        <field name="name">cliente.tree</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_tree"/>
+    <record model="ir.ui.view" id="cliente_tree_view">
+    <field name="name">cliente.tree</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_tree"/>
         <field name="arch" type="xml">
             <field name="display_name"  position="after"> 
-                <field name="numero_identidad"/>
-                <field name="codigo"/>
-            </field>
+            <field name="numero_identidad"/>
+            <field name="codigo"/>
         </field>
-</record>
-
-<record model="ir.ui.view" id="view_cliente_search">
-     <field name="name">cliente.search</field>
-     <field name="model">res.partner</field>
-     <field name="inherit_id" ref="base.view_res_partner_filter"/>
-     <field name="arch" type="xml">
-     <field  name="name" position="after">
-         <field name="numero_identidad"/>
-         <field name="codigo"/>
     </field>
-</field>
-</record>
+    </record>
 
+    <record model="ir.ui.view" id="view_cliente_search">
+    <field name="name">cliente.search</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter"/>
+    <field name="arch" type="xml">
+        <field  name="name" position="after">
+            <field name="numero_identidad"/>
+            <field name="codigo"/>
+        </field>
+    </field>
+    </record>
 <!--  Accion clientes -->
-   <record model="ir.actions.act_window" id="comercial_cliente_action">
-   <field name="name">Clientes</field>
-   <field name="res_model">res.partner</field>
-   <field name="view_type">form</field>
-   <field name="view_model">form</field>
+    <record model="ir.actions.act_window" id="comercial_cliente_action1">
+    <field name="name">Clientes</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_type">form</field>
+    <field name="view_model">tree,form</field>
     <field name="context">{'default_customer':1}</field>
-   <field name="help" type="html">
-   <p class="oe_view_nocontent_create">Cree el primer cliente</p>
-   </field>
-   </record>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Cree el primer cliente</p>
+        </field>
+    </record>
 
-  <menuitem string="Clientes"  id="menu_solicitud_esperando_aprobacion" parent="comercial_menu_config" action="comercial_cliente_action" sequence="5"/>
-
-
+    <menuitem string="Clientes" id="menu_solicitud_esperando_aprobacion" parent="menu_cliente_main" action="comercial_cliente_action1"
+    groups="sales_team.group_sale_manager,sales_team.group_sale_salesman"/>
 
 </data>
 </odoo>

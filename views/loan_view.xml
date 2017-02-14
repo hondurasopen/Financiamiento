@@ -4,7 +4,7 @@
   <!-- Vista Formulario Presamo-->
    <record model="ir.ui.view" id="comercial_loan_management_form_view">
    <field name="name">comerical.loan.management.form</field>
-   <field name="model">comerical.loan.management</field>
+   <field name="model">comercial.loan.management</field>
    <field name="arch" type="xml">
      <form string="Solicitud de lote">				
          <header>
@@ -28,6 +28,7 @@
 	      <group cols="2"> 
                 <field name="product_id"/>
 	            <field name="payment_term"/>
+                <field name="currency_id" options="{'no_create': True, 'no_open': True}" readonly="1" invisible="1"/>
                 <field name="product_value"/>
 	      </group>
 	   </group>		
@@ -41,7 +42,17 @@
         <group cols="2"> 
          <field name="monthly_payment"/>  
       </group>
-		</group>
+        </group>
+         <field name="cuota_ids" >
+                   <tree string="Plan de pago" editable="bottom" colors="blue:state == 'cotizacion';green:state=='novigente';red:state == 'cancelada'">
+                   <field name="fecha_pago"/>
+                  <field name="capital"/>
+                  <field name="interes"/>
+                    <field name="monto_cuota"/>
+            <field name="saldo_prestamo"/>
+                    <field name="state"/>
+                  </tree>
+          </field> 
 		</page>
     <page string="Referencias y Aval">
         <separator string="Información de aval"/>
@@ -74,6 +85,12 @@
           <separator string="Notas Generales"/>
           <field name="notas" placeholder="Notas generales de contrato ..."/>
       </page>
+      <page string="Factura">
+
+      </page>
+      <page string="Entrega de articulo">
+
+      </page>
   </notebook>
 	</sheet> 
      </form>
@@ -83,7 +100,7 @@
    <!--  Vista Tree Tipo de Prestamo-->
    <record model="ir.ui.view" id="comercial_loan_management_tree_view">
    <field name="name">comercial.loan.management.tree</field>
-   <field name="model">comerical.loan.management</field>
+   <field name="model">comercial.loan.management</field>
    <field name="arch" type="xml">
         <tree string="Solicitud de lotes">
             <field name="name"/>
@@ -97,7 +114,7 @@
    <!--  Accion para solicitud de Prestamos -->
    <record model="ir.actions.act_window" id="comercial_loan_management_solicitud_action">
    <field name="name">Solicitud de crédito</field>
-   <field name="res_model">comerical.loan.management</field>
+   <field name="res_model">comercial.loan.management</field>
    <field name="view_type">form</field>
    <field name="view_model">form</field>
    <field name="help" type="html">
@@ -108,7 +125,7 @@
 <!--  Accion para solicitud de Prestamos -->
    <record model="ir.actions.act_window" id="comercial_esperando_aprobacion_action">
    <field name="name">Esperando aprobacion</field>
-   <field name="res_model">comerical.loan.management</field>
+   <field name="res_model">comercial.loan.management</field>
    <field name="view_type">form</field>
    <field name="view_model">form</field>
      <field name="domain">[('state','=','progress')]</field>
@@ -119,7 +136,7 @@
       
 <record model="ir.actions.act_window" id="comercia_credito_rechazado_action">
    <field name="name">Solicitudes rechazadas</field>
-<field name="res_model">comerical.loan.management</field>
+<field name="res_model">comercial.loan.management</field>
    <field name="view_type">form</field>
    <field name="view_model">form</field>
      <field name="domain">[('state','=','rejected')]</field>
@@ -128,9 +145,9 @@
    </field>
    </record>
 
-<record model="ir.actions.act_window" id="comercial_credito_curso_action">
+<record model="ir.actions.act_window" id="comercial_credito_en_curso_action">
    <field name="name">Prestamos en curso</field>
-  <field name="res_model">comerical.loan.management</field>
+  <field name="res_model">comercial.loan.management</field>
    <field name="view_type">form</field>
    <field name="view_model">form</field>
      <field name="domain">[('state','=','approved')]</field>
@@ -147,7 +164,7 @@
 
   <menuitem string="Solicitudes rechazadas"  id="menu_solicitud_rechazadas" parent="comercial_menu_config" action="comercia_credito_rechazado_action" sequence="15"/>
 
-  <menuitem string="Crédito en curso" id="menu_creditos_en_curso" parent="comercial_menu_config" action="comercial_credito_curso_action" sequence="25"/>
+  <menuitem string="Crédito en curso" id="menu_creditos_en_curso" parent="comercial_menu_config" action="comercial_credito_en_curso_action" sequence="25"/>
 
 
    </data>
