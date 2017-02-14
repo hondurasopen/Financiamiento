@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+<record model="ir.ui.view" id="cliente_form_view">
+        <field name="name">cliente.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="website" position="replace">
+                <field name="website" invisible="1"/>	
+            </field>
+            <field name="function" position="replace">
+               <field name="function" invisible="1"/>	
+            </field>
+            <field name="title" position="replace">
+              <field name="title" invisible="1"/>
+             </field>
+             <notebook position="inside">
+                <page string="Información de cliente" sequence="1" attrs="{'invisible': [('customer', '=', False)]}">
+                    <separator string="Información de cliente"/>
+                    <group>
+                        <group>
+                            <field name="numero_identidad" />
+                            <field name="codigo"/>
+                            <field name="sexo"/>
+                            <field name="casa"/>
+                        </group>
+                        <group >
+                            <field name="empresa_labora" placeholder="Empresa en que labora..."/>
+                            <field name="tel_trabajo" placeholder="Tel y celular..."/>
+                            <field name="dir_trabajo" placeholder="Dirección de trabajo..."/>
+                        </group>
+                    </group>
+                    <separator string="Información de cónyuge"/>
+                    <group>
+                        <group>
+                            <field name="nombre_conyuge" />
+                            <field name="id_conyuge"/>
+                        </group>
+                        <group >
+                            <field name="empresa_labora_conyuge" placeholder="Empresa en que labora..."/>
+                            <field name="tel_trabajo_conyuge" placeholder="Tel y celular..."/>
+                            <field name="dir_trabajo_conyuge" placeholder="Dirección de trabajo..."/>
+                        </group>
+                    </group>
+                </page>
+             </notebook>
+        </field>
+</record>
+
+<record model="ir.ui.view" id="cliente_tree_view">
+        <field name="name">cliente.tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="display_name"  position="after"> 
+                <field name="numero_identidad"/>
+                <field name="codigo"/>
+            </field>
+        </field>
+</record>
+
+<record model="ir.ui.view" id="view_cliente_search">
+     <field name="name">cliente.search</field>
+     <field name="model">res.partner</field>
+     <field name="inherit_id" ref="base.view_res_partner_filter"/>
+     <field name="arch" type="xml">
+     <field  name="name" position="after">
+         <field name="numero_identidad"/>
+         <field name="codigo"/>
+    </field>
+</field>
+</record>
+
+<!--  Accion clientes -->
+   <record model="ir.actions.act_window" id="comercial_cliente_action">
+   <field name="name">Clientes</field>
+   <field name="res_model">res.partner</field>
+   <field name="view_type">form</field>
+   <field name="view_model">form</field>
+    <field name="context">{'default_customer':1}</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Cree el primer cliente</p>
+   </field>
+   </record>
+
+  <menuitem string="Clientes"  id="menu_solicitud_esperando_aprobacion" parent="comercial_menu_config" action="comercial_cliente_action" sequence="5"/>
+
+
+
+</data>
+</odoo>
+
+

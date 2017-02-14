@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_comercial_root" name="Creditos"
+        sequence="25"
+        web_icon="comercial,static/description/icon.png"/>
+
+    <menuitem id="comercial_menu_config" name="Gestión de creditos"
+        sequence="100" parent="comercial.menu_comercial_root"/>
+
+<menuitem string="Gestión de clientes"  id="menu_gestion_cliente" parent="menu_comercial_root" sequence="10"/>
+
+</odoo>

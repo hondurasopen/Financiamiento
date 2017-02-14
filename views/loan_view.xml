@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+  <!-- Vista Formulario Presamo-->
+   <record model="ir.ui.view" id="comercial_loan_management_form_view">
+   <field name="name">comerical.loan.management.form</field>
+   <field name="model">comerical.loan.management</field>
+   <field name="arch" type="xml">
+     <form string="Solicitud de lote">				
+         <header>
+   
+   <button name="action_quotation" type="object" string="Cotización" states="rechazado,progress,rejected"  class="oe_highlight oe_read_only"/>  
+<button name="action_rejected" type="object" string="Rechazar solicitud" states="quotation,progress,approved" class="oe_highlight oe_read_only"/>
+<button name="action_approved" type="object" string="Aprobar solicitud" states="quotation,progress" class="oe_highlight oe_read_only"/>
+		<field name="state" widget="statusbar" nolabel="1"/>
+         </header>	
+          <sheet>
+           <h1>
+              <field name="name" placeholder="Numero de registro ..." class="oe_inline"/>
+          </h1>
+           <separator string="Información General"/>
+          <group colspan="4">
+               <group cols="2">   
+               	<field name="partner_id"/>     
+               	<field name="request_date" />
+               	<field name="approval_date"/> 
+	      </group>
+	      <group cols="2"> 
+                <field name="product_id"/>
+	            <field name="payment_term"/>
+                <field name="product_value"/>
+	      </group>
+	   </group>		
+	      <notebook>
+	  	<page string="Plan de pagos">
+		<separator string="Informacion de pagos"/>
+		 <group colspan="4">
+         <group cols="2"> 
+<button name="get_calculadora_emi" class="oe_highlight" string="Calculadora EMI" type="object" colspan="4" />
+      </group>   
+        <group cols="2"> 
+         <field name="monthly_payment"/>  
+      </group>
+		</group>
+		</page>
+    <page string="Referencias y Aval">
+        <separator string="Información de aval"/>
+    <group colspan="4">
+        <group cols="2">
+            <field name="nombre_aval"/>
+            <field name="identidad_aval"/>
+            <field name="sexo"/>
+            <field name="casa"/>
+        </group>
+        <group cols="2">
+            <field name="lugar_trabajo_aval"/>
+            <field name="dir_trabajo_aval"/>
+        </group>
+    </group>
+        <separator string="Referencia de amistad"/>
+        <group colspan="4">
+        <group cols="2">
+            <field name="referencias1"/>
+            <field name="tel_referencia_amistad1"/>
+            </group>
+            <group cols="2">
+                <field name="referencias2"/>
+                <field name="tel_referencia_amistad2"/>
+            </group>
+        </group>
+
+    </page>
+      <page string="Notas Generales">
+          <separator string="Notas Generales"/>
+          <field name="notas" placeholder="Notas generales de contrato ..."/>
+      </page>
+  </notebook>
+	</sheet> 
+     </form>
+   </field> 
+   </record> 
+   <!-- Fin de Vista form  -->
+   <!--  Vista Tree Tipo de Prestamo-->
+   <record model="ir.ui.view" id="comercial_loan_management_tree_view">
+   <field name="name">comercial.loan.management.tree</field>
+   <field name="model">comerical.loan.management</field>
+   <field name="arch" type="xml">
+        <tree string="Solicitud de lotes">
+            <field name="name"/>
+            <field name="request_date" />
+            <field name="approval_date"/> 
+            <field name="product_value"/> 
+            <field name="payment_term" />
+        </tree>
+   </field> 
+   </record>
+   <!--  Accion para solicitud de Prestamos -->
+   <record model="ir.actions.act_window" id="comercial_loan_management_solicitud_action">
+   <field name="name">Solicitud de crédito</field>
+   <field name="res_model">comerical.loan.management</field>
+   <field name="view_type">form</field>
+   <field name="view_model">form</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera solicitud de crédito</p>
+   </field>
+   </record>
+
+<!--  Accion para solicitud de Prestamos -->
+   <record model="ir.actions.act_window" id="comercial_esperando_aprobacion_action">
+   <field name="name">Esperando aprobacion</field>
+   <field name="res_model">comerical.loan.management</field>
+   <field name="view_type">form</field>
+   <field name="view_model">form</field>
+     <field name="domain">[('state','=','progress')]</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera solicitud de crédito</p>
+   </field>
+   </record>
+      
+<record model="ir.actions.act_window" id="comercia_credito_rechazado_action">
+   <field name="name">Solicitudes rechazadas</field>
+<field name="res_model">comerical.loan.management</field>
+   <field name="view_type">form</field>
+   <field name="view_model">form</field>
+     <field name="domain">[('state','=','rejected')]</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera solicitud de crédito</p>
+   </field>
+   </record>
+
+<record model="ir.actions.act_window" id="comercial_credito_curso_action">
+   <field name="name">Prestamos en curso</field>
+  <field name="res_model">comerical.loan.management</field>
+   <field name="view_type">form</field>
+   <field name="view_model">form</field>
+     <field name="domain">[('state','=','approved')]</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera solicitud de crédito</p>
+   </field>
+   </record>
+   <!-- Fin de Action de Contratos -->
+     <!--  Menu Principal de Prestamos-->
+
+   <menuitem string="Solicitudes de crédito"  id="menu_solicitud_lotes" parent="comercial_menu_config" action="comercial_loan_management_solicitud_action" sequence="1"/>
+
+  <menuitem string="Solicitudes esperando aprobacion"  id="menu_solicitud_esperando_aprobacion" parent="comercial_menu_config" action="comercial_esperando_aprobacion_action" sequence="5"/>
+
+  <menuitem string="Solicitudes rechazadas"  id="menu_solicitud_rechazadas" parent="comercial_menu_config" action="comercia_credito_rechazado_action" sequence="15"/>
+
+  <menuitem string="Crédito en curso" id="menu_creditos_en_curso" parent="comercial_menu_config" action="comercial_credito_curso_action" sequence="25"/>
+
+
+   </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
