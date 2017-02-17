@@ -21,39 +21,40 @@
            <separator string="Información General"/>
           <group colspan="4">
                <group cols="2">   
-               	<field name="partner_id"/>     
+               	<field name="partner_id"  domain="[('customer', '=', True)]"/>     
                	<field name="request_date" />
                	<field name="approval_date"/> 
 	      </group>
 	      <group cols="2"> 
-                <field name="product_id"/>
-	            <field name="payment_term"/>
+                <field name="product_id" domain="[('sale_ok', '=', True)]"/>
+	            <field name="payment_term" placeholder="seleccione plazos de pago"/>
                 <field name="currency_id" options="{'no_create': True, 'no_open': True}" readonly="1" invisible="1"/>
                 <field name="product_value"/>
 	      </group>
 	   </group>		
-	      <notebook>
-	  	<page string="Plan de pagos">
-		<separator string="Informacion de pagos"/>
-		 <group colspan="4">
-         <group cols="2"> 
-<button name="get_calculadora_emi" class="oe_highlight" string="Calculadora EMI" type="object" colspan="4" />
-      </group>   
+    <notebook>
+    <page string="Plan de pagos">
+        <separator string="Información de pagos"/>
+        <group colspan="4">
         <group cols="2"> 
-         <field name="monthly_payment"/>  
-      </group>
+              <field name="price_financiado"/>
+             <field name="prima_pago"/>
+             <field name="monthly_payment"/>
+        </group>   
+        <group cols="2"> 
+            <field name="credito_con_prima"/>
+            <button name="get_calculadora_emi" class="oe_highlight" string="Crear plan de pago" type="object" colspan="4" />
+        </group>
         </group>
          <field name="cuota_ids" >
                    <tree string="Plan de pago" editable="bottom" colors="blue:state == 'cotizacion';green:state=='novigente';red:state == 'cancelada'">
                    <field name="fecha_pago"/>
-                  <field name="capital"/>
-                  <field name="interes"/>
                     <field name="monto_cuota"/>
             <field name="saldo_prestamo"/>
                     <field name="state"/>
                   </tree>
           </field> 
-		</page>
+    </page>
     <page string="Referencias y Aval">
         <separator string="Información de aval"/>
     <group colspan="4">
@@ -86,7 +87,14 @@
           <field name="notas" placeholder="Notas generales de contrato ..."/>
       </page>
       <page string="Factura">
-
+        <field name="invoice_ids" >
+                   <tree string="Factura de Cliente" editable="bottom">
+                    <field name="date_invoice"/>
+                    <field name="user_id"/>
+                    <field name="amount_total"/>
+                    <field name="state"/>
+                  </tree>
+          </field> 
       </page>
       <page string="Entrega de articulo">
 

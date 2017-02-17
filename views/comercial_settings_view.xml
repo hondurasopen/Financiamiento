@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<record model="ir.ui.view" id="comercial_forma_pago_form_view">
+   <field name="name">comercial.loan.forma.pago.form</field>
+   <field name="model">comercial.loan.forma.pago</field>
+   <field name="arch" type="xml">
+     <form string="Plazo de pago">
+      <sheet> 
+		<h1>
+           <field name="name" placeholder="Plazos de pago ..." class="oe_inline"/>
+        </h1> 
+        <group colspan="4">
+            <group cols="2">   
+               	 <field name="tasa_rate"/>
+	        </group>
+	    </group>		
+	    <notebook>
+	     	<page string="Notas generales">
+		    	<field name="notas" placeholder="Notas generales"/>
+			</page>
+		</notebook>
+	</sheet>     
+     </form>
+   </field> 
+</record> 
+
+<record model="ir.ui.view" id="comercial_forma_pago_tree_view">
+   <field name="name">comercial.loan.forma.pago.tree</field>
+   <field name="model">comercial.loan.forma.pago</field>
+   <field name="arch" type="xml">
+       <tree string="Tipo de Prestamos">
+                <field name="name" />
+            	<field name="tasa_rate"/>         
+       </tree>
+   </field> 
+ </record>
+
+<record model="ir.actions.act_window" id="comercial_forma_pago_action">
+   <field name="name">Plazos de pago</field>
+   <field name="res_model">comercial.loan.forma.pago</field>
+   <field name="view_type">form</field>
+   <field name="view_model">form</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear plazos de pago</p>
+   </field>
+   </record>
+
+<menuitem id="comercial_menu_settings" name="Configuración" action="comercial_forma_pago_action" sequence="1000" parent="comercial.menu_comercial_root"/>
+
+<menuitem id="settings_plazos_pago" name="Plazos de pago" action="comercial_forma_pago_action" sequence="1000" parent="comercial_menu_settings"/>
+
+</odoo>

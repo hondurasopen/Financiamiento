@@ -21,8 +21,6 @@
 	           <group cols="2">
                 <field name="fecha_pago" />
 	               <field name="monto_cuota" />
-	               <field name="capital"/>
-	               <field name="interes"/>	
 	           </group>
 	         </group>		
 	      <notebook>
@@ -45,8 +43,6 @@
             	<field name="contrato_id"/>         
               <field name="partner_id"/>
 	            <field name="monto_cuota" />
-	            <field name="capital"/>
-	            <field name="interes"/>
        </tree>
    </field> 
    </record>
@@ -84,11 +80,10 @@
    </field>
    </record>
 
-
  <menuitem id="comercial_cuotas" name="Gestion de cuotas" string="Gestion de Cuotas" parent="comercial.menu_comercial_root" sequence="200"/>
 
  <menuitem id="loan_cuota_management" name="Cuotas" string="Cuotas" parent="comercial_cuotas" 
-action="comercial_loan_management_fees_action" sequence="200"/>
+action="comercial_loan_management_fees_action" sequence="10"/>
 
   <menuitem id="loan_cuota_management_vigente" name="Cuota de credito vigentes" string="Cuota de credito vigentes" parent="comercial_cuotas" action="comercial_loan_management_fees_vigente_action" sequence="30"/>
  

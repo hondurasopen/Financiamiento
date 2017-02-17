@@ -76,15 +76,17 @@
     <field name="name">Clientes</field>
     <field name="res_model">res.partner</field>
     <field name="view_type">form</field>
-    <field name="view_model">tree,form</field>
+    <field name="view_model">kanban,tree,form</field>
     <field name="context">{'default_customer':1}</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">Cree el primer cliente</p>
         </field>
     </record>
 
-    <menuitem string="Clientes" id="menu_solicitud_esperando_aprobacion" parent="menu_cliente_main" action="comercial_cliente_action1"
-    groups="sales_team.group_sale_manager,sales_team.group_sale_salesman"/>
+    <menuitem string="Gestión de clientes" name="Gestión de clientes" id="menu_cliente_main" parent="menu_comercial_root" sequence="1"/>
+
+    <menuitem string="Clientes" name="Clientes" id="menu_solicitud_esperando_aprobacion" parent="menu_cliente_main" action="comercial_cliente_action1"/>
+
 
 </data>
 </odoo>
